@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Registration — Yarra Wagga | John Batman</title>
+  <meta name="description" content="Register your business or store to join our services in the Yarra Wagga region." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg-gradient"></div>
+  <div class="bg-pattern"></div>
+
+  <!-- Top navigation bar -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-mark">JB</div>
+        <div class="logo-text">
+          <span class="logo-brand">John Batman</span>
+          <span class="logo-region">Yarra Wagga</span>
+        </div>
+      </div>
+      <div class="header-badge">Business Portal</div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main">
+    <div class="container">
+
+      <!-- Hero section -->
+      <section class="hero">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          Yarra Wagga Region
+        </div>
+        <h1 class="hero-title">Partner With Us</h1>
+        <p class="hero-subtitle">
+          Join our network of businesses and stores. Complete the form below and our
+          team will be in touch to get you started.
+        </p>
+      </section>
+
+      <!-- Services overview pills -->
+      <div class="service-pills">
+        <div class="pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Printed Compendium
+        </div>
+        <div class="pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Digital Compendium
+        </div>
+        <div class="pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="3"/></svg>
+          Visit Touchscreen
+        </div>
+      </div>
+
+      <!-- Form card -->
+      <div class="card">
+
+        <!-- Step indicator -->
+        <div class="steps">
+          <div class="step active" id="step-1-indicator">
+            <div class="step-number">1</div>
+            <div class="step-label">Business Info</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step" id="step-2-indicator">
+            <div class="step-number">2</div>
+            <div class="step-label">Contact Details</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step" id="step-3-indicator">
+            <div class="step-number">3</div>
+            <div class="step-label">Services</div>
+          </div>
+        </div>
+
+        <form id="requestForm" novalidate>
+
+          <!-- ── Step 1: Business Info ── -->
+          <div class="form-step" id="step-1">
+            <div class="step-header">
+              <div class="step-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div>
+                <h2 class="step-title">Business Information</h2>
+                <p class="step-desc">Tell us about your store or business.</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="businessName">Business Name <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <input
+                  type="text"
+                  id="businessName"
+                  name="businessName"
+                  class="input"
+                  placeholder="e.g. The Corner Café"
+                  autocomplete="organization"
+                  required
+                />
+              </div>
+              <span class="field-error" id="businessName-error"></span>
+            </div>
+
+            <div class="step-nav">
+              <div></div>
+              <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+                Continue
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Step 2: Contact Details ── -->
+          <div class="form-step hidden" id="step-2">
+            <div class="step-header">
+              <div class="step-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <h2 class="step-title">Contact Details</h2>
+                <p class="step-desc">Who should we reach out to?</p>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label class="label" for="firstName">First Name <span class="required">*</span></label>
+                <div class="input-wrapper">
+                  <input type="text" id="firstName" name="firstName" class="input" placeholder="First name" autocomplete="given-name" required />
+                </div>
+                <span class="field-error" id="firstName-error"></span>
+              </div>
+              <div class="field">
+                <label class="label" for="middleName">Middle Name <span class="optional">(optional)</span></label>
+                <div class="input-wrapper">
+                  <input type="text" id="middleName" name="middleName" class="input" placeholder="Middle name" autocomplete="additional-name" />
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="lastName">Last Name <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="lastName" name="lastName" class="input" placeholder="Last name" autocomplete="family-name" required />
+              </div>
+              <span class="field-error" id="lastName-error"></span>
+            </div>
+
+            <div class="field">
+              <label class="label" for="phone">Contact Phone Number <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.08 6.08l1.08-.935a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <input type="tel" id="phone" name="phone" class="input" placeholder="e.g. 03 9000 1234" autocomplete="tel" required />
+              </div>
+              <span class="field-error" id="phone-error"></span>
+            </div>
+
+            <div class="step-nav">
+              <button type="button" class="btn btn-ghost" onclick="prevStep(2)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back
+              </button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                Continue
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Step 3: Services ── -->
+          <div class="form-step hidden" id="step-3">
+            <div class="step-header">
+              <div class="step-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div>
+                <h2 class="step-title">Select Services</h2>
+                <p class="step-desc">Choose the services you'd like to apply for. Select at least one.</p>
+              </div>
+            </div>
+
+            <div class="service-options" role="group" aria-labelledby="services-label">
+              <span id="services-label" class="sr-only">Available services</span>
+
+              <label class="service-card" for="printedCompendium">
+                <input type="checkbox" id="printedCompendium" name="services" value="printedCompendium" class="service-checkbox" />
+                <div class="service-card-inner">
+                  <div class="service-card-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  </div>
+                  <div class="service-card-body">
+                    <h3 class="service-name">Printed Compendium</h3>
+                    <p class="service-desc">Physical printed guides and brochures for your location.</p>
+                  </div>
+                  <div class="service-card-check">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </label>
+
+              <label class="service-card" for="digitalCompendium">
+                <input type="checkbox" id="digitalCompendium" name="services" value="digitalCompendium" class="service-checkbox" />
+                <div class="service-card-inner">
+                  <div class="service-card-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </div>
+                  <div class="service-card-body">
+                    <h3 class="service-name">Digital Compendium</h3>
+                    <p class="service-desc">Online digital guide accessible across all devices.</p>
+                  </div>
+                  <div class="service-card-check">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </label>
+
+              <label class="service-card" for="visitTouchscreen">
+                <input type="checkbox" id="visitTouchscreen" name="services" value="visitTouchscreen" class="service-checkbox" />
+                <div class="service-card-inner">
+                  <div class="service-card-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+                  </div>
+                  <div class="service-card-body">
+                    <h3 class="service-name">Visit Touchscreen</h3>
+                    <p class="service-desc">Interactive touchscreen kiosk for visitor information.</p>
+                  </div>
+                  <div class="service-card-check">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <span class="field-error" id="services-error"></span>
+
+            <div class="step-nav">
+              <button type="button" class="btn btn-ghost" onclick="prevStep(3)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back
+              </button>
+              <button type="submit" class="btn btn-submit" id="submitBtn">
+                <span class="btn-text">Submit Request</span>
+                <span class="btn-loader hidden">
+                  <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"/></svg>
+                </span>
+                <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Success state -->
+        <div class="success-state hidden" id="successState">
+          <div class="success-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="success-title">Request Submitted!</h2>
+          <p class="success-msg">
+            Thank you for reaching out. Our Yarra Wagga team has received your request
+            and will be in contact with you shortly.
+          </p>
+          <div class="success-details" id="successDetails"></div>
+          <button type="button" class="btn btn-ghost" style="margin-top:24px;" onclick="resetForm()">Submit another request</button>
+        </div>
+
+      </div><!-- /.card -->
+
+      <!-- Trust badges -->
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Your data is safe with us
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          We'll respond within 2 business days
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Dedicated local support
+        </div>
+      </div>
+
+    </div><!-- /.container -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2025 John Batman &mdash; Yarra Wagga Region. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
