@@ -33,8 +33,9 @@ function validateStep(step) {
     const first = document.getElementById('firstName').value.trim();
     const last  = document.getElementById('lastName').value.trim();
     const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
 
-    clearError('firstName'); clearError('lastName'); clearError('phone');
+    clearError('firstName'); clearError('lastName'); clearError('phone'); clearError('email');
 
     if (!first) { showError('firstName', 'Please enter a first name.'); valid = false; }
     if (!last)  { showError('lastName',  'Please enter a last name.');  valid = false; }
@@ -42,6 +43,11 @@ function validateStep(step) {
       showError('phone', 'Please enter a phone number.'); valid = false;
     } else if (!/^[\d\s\+\-\(\)]{6,20}$/.test(phone)) {
       showError('phone', 'Please enter a valid phone number.'); valid = false;
+    }
+    if (!email) {
+      showError('email', 'Please enter an email address.'); valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('email', 'Please enter a valid email address.'); valid = false;
     }
   }
 
@@ -88,7 +94,7 @@ function prevStep(from) {
 
 // ── Live validation (clear error on change) ───────────────────────────────────
 
-['businessName', 'firstName', 'lastName', 'phone'].forEach(id => {
+['businessName', 'firstName', 'lastName', 'phone', 'email'].forEach(id => {
   const el = document.getElementById(id);
   if (el) {
     el.addEventListener('input', () => {
@@ -130,6 +136,7 @@ document.getElementById('requestForm').addEventListener('submit', async (e) => {
     middleName:   document.getElementById('middleName').value.trim(),
     lastName:     document.getElementById('lastName').value.trim(),
     phone:        document.getElementById('phone').value.trim(),
+    email:        document.getElementById('email').value.trim(),
     services,
   };
 
@@ -186,6 +193,7 @@ function showSuccess(data) {
     <div><strong>Business:</strong> ${escapeHtml(data.businessName)}</div>
     <div><strong>Contact:</strong> ${escapeHtml(fullName)}</div>
     <div><strong>Phone:</strong> ${escapeHtml(data.phone)}</div>
+    <div><strong>Email:</strong> ${escapeHtml(data.email)}</div>
     <div><strong>Services:</strong> ${escapeHtml(serviceList)}</div>
   `;
 
@@ -209,7 +217,7 @@ function resetForm() {
   document.getElementById('submit-error').classList.add('hidden');
 
   // Clear all errors
-  ['businessName', 'firstName', 'lastName', 'phone'].forEach(clearError);
+  ['businessName', 'firstName', 'lastName', 'phone', 'email'].forEach(clearError);
   document.getElementById('services-error').textContent = '';
 
   currentStep = 1;
