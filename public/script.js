@@ -147,10 +147,10 @@ document.getElementById('requestForm').addEventListener('submit', async (e) => {
       const msg = data.errors
         ? data.errors.map(e => e.msg).join(' ')
         : (data.message || 'Something went wrong. Please try again.');
-      alert(msg);
+      showSubmitError(msg);
     }
   } catch {
-    alert('Network error. Please check your connection and try again.');
+    showSubmitError('Network error. Please check your connection and try again.');
   } finally {
     submitBtn.disabled = false;
     btnText.textContent = 'Submit Request';
@@ -167,7 +167,16 @@ const serviceLabels = {
   visitTouchscreen:   'Visit Touchscreen',
 };
 
+function showSubmitError(msg) {
+  const el = document.getElementById('submit-error');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 function showSuccess(data) {
+  document.getElementById('submit-error').classList.add('hidden');
+  document.querySelector('.steps').classList.add('hidden');
   document.getElementById('requestForm').classList.add('hidden');
 
   const fullName = [data.firstName, data.middleName, data.lastName].filter(Boolean).join(' ');
@@ -196,6 +205,8 @@ function resetForm() {
   document.getElementById('requestForm').reset();
   document.getElementById('requestForm').classList.remove('hidden');
   document.getElementById('successState').classList.add('hidden');
+  document.querySelector('.steps').classList.remove('hidden');
+  document.getElementById('submit-error').classList.add('hidden');
 
   // Clear all errors
   ['businessName', 'firstName', 'lastName', 'phone'].forEach(clearError);

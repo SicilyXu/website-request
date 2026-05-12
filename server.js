@@ -163,7 +163,7 @@ app.post('/api/submit', submitLimiter, validateSubmission, async (req, res) => {
     const mailOptions = {
       from: `"Yarra Wagga Business Portal" <${process.env.SMTP_USER}>`,
       to: MANAGER_EMAIL,
-      cc: STAFF_EMAIL,
+      // cc: STAFF_EMAIL,  // TODO: uncomment before production deployment
       subject: `New Business Request — ${businessName}`,
       text: [
         `NEW BUSINESS REQUEST — YARRA WAGGA REGION`,
