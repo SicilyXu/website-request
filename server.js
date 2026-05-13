@@ -72,7 +72,7 @@ function buildEmailHtml(data) {
   const serviceLabels = {
     printedCompendium: 'Printed Compendium',
     digitalCompendium: 'Digital Compendium',
-    visitTouchscreen: 'Visit Touchscreen',
+    visitTouchscreen: 'Touchscreen',
   };
   const selectedServices = services.map(s => serviceLabels[s] || s);
 
@@ -190,7 +190,7 @@ app.post('/api/submit', submitLimiter, validateSubmission, async (req, res) => {
   const serviceLabels = {
     printedCompendium: 'Printed Compendium',
     digitalCompendium: 'Digital Compendium',
-    visitTouchscreen: 'Visit Touchscreen',
+    visitTouchscreen: 'Touchscreen',
   };
   const serviceNames = services.map(s => serviceLabels[s]).join(', ');
 

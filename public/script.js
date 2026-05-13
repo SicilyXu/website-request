@@ -211,7 +211,7 @@ document.getElementById('requestForm').addEventListener('submit', async (e) => {
 const serviceLabels = {
   printedCompendium:  'Printed Compendium',
   digitalCompendium:  'Digital Compendium',
-  visitTouchscreen:   'Visit Touchscreen',
+  visitTouchscreen:   'Touchscreen',
 };
 
 function showSubmitError(msg) {
