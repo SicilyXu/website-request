@@ -1,7 +1,7 @@
 {
-  "name": "yarra-wagga-business-request",
+  "name": "warrnambool-business-request",
   "version": "1.0.0",
-  "description": "Business registration request portal for Yarra Wagga region",
+  "description": "Business registration request portal for Warrnambool region",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

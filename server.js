@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const SMTP_FROM_NAME = process.env.SMTP_FROM_NAME || 'Yarra Wagga Business Portal';
+const SMTP_FROM_NAME = process.env.SMTP_FROM_NAME || 'Warrnambool Business Portal';
 const MANAGER_EMAIL = process.env.MANAGER_EMAIL || 'sicily@johnbatman.com.au';
 const STAFF_EMAIL = process.env.STAFF_EMAIL || 'JenniferReed@johnbatman.com.au';
 
@@ -92,7 +92,7 @@ function buildEmailHtml(data) {
           <!-- Header -->
           <tr>
             <td style="background:linear-gradient(135deg,#1a2a4a 0%,#2d4a7a 100%);padding:40px 40px 30px;text-align:center;">
-              <p style="color:#c9a84c;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px;">Yarra Wagga Region</p>
+              <p style="color:#c9a84c;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px;">Warrnambool Region</p>
               <h1 style="color:#ffffff;font-size:26px;font-weight:700;margin:0 0 6px;">New Business Request</h1>
               <p style="color:#a8bcd4;font-size:14px;margin:0;">Submitted via the Business Registration Portal</p>
             </td>
@@ -154,7 +154,7 @@ function buildEmailHtml(data) {
               <p style="color:#a0aec0;font-size:12px;margin:0;">
                 This request was submitted on ${new Date().toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', dateStyle: 'full', timeStyle: 'short' })}
               </p>
-              <p style="color:#a0aec0;font-size:12px;margin:6px 0 0;">John Batman &mdash; Yarra Wagga Business Portal</p>
+              <p style="color:#a0aec0;font-size:12px;margin:6px 0 0;">John Batman &mdash; Warrnambool Business Portal</p>
             </td>
           </tr>
         </table>
