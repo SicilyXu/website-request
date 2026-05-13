@@ -67,8 +67,8 @@ async function verifySmtpConfig() {
 }
 
 function buildEmailHtml(data) {
-  const { businessName, firstName, middleName, lastName, phone, email, services } = data;
-  const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+  const { businessName, firstName, lastName, phone, email, services } = data;
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
   const serviceLabels = {
     printedCompendium: 'Printed Compendium',
     digitalCompendium: 'Digital Compendium',
@@ -169,7 +169,6 @@ function buildEmailHtml(data) {
 const validateSubmission = [
   body('businessName').trim().notEmpty().withMessage('Business name is required').isLength({ max: 200 }),
   body('firstName').trim().notEmpty().withMessage('First name is required').isLength({ max: 100 }),
-  body('middleName').trim().optional({ checkFalsy: true }).isLength({ max: 100 }),
   body('lastName').trim().notEmpty().withMessage('Last name is required').isLength({ max: 100 }),
   body('phone').trim().notEmpty().withMessage('Phone number is required')
     .matches(/^[\d\s\+\-\(\)]{6,20}$/).withMessage('Please enter a valid phone number'),
@@ -185,8 +184,8 @@ app.post('/api/submit', submitLimiter, validateSubmission, async (req, res) => {
     return res.status(400).json({ success: false, errors: errors.array() });
   }
 
-  const { businessName, firstName, middleName, lastName, phone, email, services } = req.body;
-  const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+  const { businessName, firstName, lastName, phone, email, services } = req.body;
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
 
   const serviceLabels = {
     printedCompendium: 'Printed Compendium',
@@ -218,7 +217,7 @@ app.post('/api/submit', submitLimiter, validateSubmission, async (req, res) => {
         ``,
         `Submitted: ${new Date().toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })}`,
       ].join('\n'),
-      html: buildEmailHtml({ businessName, firstName, middleName, lastName, phone, email, services }),
+      html: buildEmailHtml({ businessName, firstName, lastName, phone, email, services }),
     };
 
     await transporter.sendMail(mailOptions);

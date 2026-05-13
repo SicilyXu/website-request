@@ -103,6 +103,19 @@ function prevStep(from) {
   }
 });
 
+// Auto-capitalise first letter for name fields
+['firstName', 'lastName'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('input', () => {
+      const val = el.value;
+      if (val.length > 0) {
+        el.value = val.charAt(0).toUpperCase() + val.slice(1);
+      }
+    });
+  }
+});
+
 document.querySelectorAll('input[name="services"]').forEach(cb => {
   cb.addEventListener('change', () => {
     const checked = document.querySelectorAll('input[name="services"]:checked');
@@ -133,7 +146,6 @@ document.getElementById('requestForm').addEventListener('submit', async (e) => {
   const payload = {
     businessName: document.getElementById('businessName').value.trim(),
     firstName:    document.getElementById('firstName').value.trim(),
-    middleName:   document.getElementById('middleName').value.trim(),
     lastName:     document.getElementById('lastName').value.trim(),
     phone:        document.getElementById('phone').value.trim(),
     email:        document.getElementById('email').value.trim(),
@@ -186,7 +198,7 @@ function showSuccess(data) {
   document.querySelector('.steps').classList.add('hidden');
   document.getElementById('requestForm').classList.add('hidden');
 
-  const fullName = [data.firstName, data.middleName, data.lastName].filter(Boolean).join(' ');
+  const fullName = [data.firstName, data.lastName].filter(Boolean).join(' ');
   const serviceList = data.services.map(s => serviceLabels[s]).join(', ');
 
   document.getElementById('successDetails').innerHTML = `
