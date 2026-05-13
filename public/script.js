@@ -103,6 +103,34 @@ function prevStep(from) {
   }
 });
 
+// ── Phone: only allow digits, spaces, +, -, (, ) ─────────────────────────────
+const phoneEl = document.getElementById('phone');
+if (phoneEl) {
+  phoneEl.addEventListener('input', () => {
+    const cursor = phoneEl.selectionStart;
+    const cleaned = phoneEl.value.replace(/[^\d\s\+\-\(\)]/g, '');
+    if (phoneEl.value !== cleaned) {
+      phoneEl.value = cleaned;
+      phoneEl.setSelectionRange(cursor - 1, cursor - 1);
+    }
+    if (cleaned.trim()) clearError('phone');
+  });
+}
+
+// ── Email: only allow valid email characters ──────────────────────────────────
+const emailEl = document.getElementById('email');
+if (emailEl) {
+  emailEl.addEventListener('input', () => {
+    const cursor = emailEl.selectionStart;
+    const cleaned = emailEl.value.replace(/[^\w._%+\-@]/g, '');
+    if (emailEl.value !== cleaned) {
+      emailEl.value = cleaned;
+      emailEl.setSelectionRange(cursor - 1, cursor - 1);
+    }
+    if (cleaned.trim()) clearError('email');
+  });
+}
+
 // Auto-capitalise first letter for name fields
 ['firstName', 'lastName'].forEach(id => {
   const el = document.getElementById(id);
