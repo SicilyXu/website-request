@@ -252,7 +252,7 @@ body {
   outline: none;
   -webkit-appearance: none;
 }
-.input-wrapper .input { padding-left: 44px; }
+.input-wrapper:has(.input-icon) .input { padding-left: 44px; }
 .input::placeholder { color: #b8c4d0; }
 .input:hover { border-color: #c0cfe0; }
 .input:focus {
