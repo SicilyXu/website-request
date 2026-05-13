@@ -8,8 +8,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const MANAGER_EMAIL = 'sicily@johnbatman.com.au';
-const STAFF_EMAIL = 'JenniferReed@johnbatman.com.au';
+const SMTP_FROM_NAME = process.env.SMTP_FROM_NAME || 'Yarra Wagga Business Portal';
+const MANAGER_EMAIL = process.env.MANAGER_EMAIL || 'sicily@johnbatman.com.au';
+const STAFF_EMAIL = process.env.STAFF_EMAIL || 'JenniferReed@johnbatman.com.au';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,8 +34,40 @@ function createTransporter() {
   });
 }
 
+function getRecipientConfig() {
+  return {
+    to: MANAGER_EMAIL,
+    cc: STAFF_EMAIL || undefined,
+  };
+}
+
+function getMissingSmtpConfig() {
+  const requiredVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS'];
+  return requiredVars.filter((key) => !process.env[key]);
+}
+
+async function verifySmtpConfig() {
+  const missingVars = getMissingSmtpConfig();
+  if (missingVars.length > 0) {
+    console.warn(
+      `[SMTP] Missing configuration: ${missingVars.join(', ')}. ` +
+      'Form submissions will fail until these are set in .env.'
+    );
+    return false;
+  }
+
+  try {
+    await createTransporter().verify();
+    console.log(`[SMTP] Ready. Sending as ${process.env.SMTP_USER} to ${MANAGER_EMAIL}${STAFF_EMAIL ? ` (cc: ${STAFF_EMAIL})` : ''}`);
+    return true;
+  } catch (error) {
+    console.error(`[SMTP] Verification failed: ${error.message}`);
+    return false;
+  }
+}
+
 function buildEmailHtml(data) {
-  const { businessName, firstName, middleName, lastName, phone, services } = data;
+  const { businessName, firstName, middleName, lastName, phone, email, services } = data;
   const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
   const serviceLabels = {
     printedCompendium: 'Printed Compendium',
@@ -82,8 +115,11 @@ function buildEmailHtml(data) {
                   <td style="padding-bottom:24px;">
                     <p style="color:#8a9bb0;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Contact Person</p>
                     <p style="color:#1a2a4a;font-size:16px;font-weight:600;margin:0 0 4px;">${fullName}</p>
-                    <p style="color:#4a6080;font-size:14px;margin:0;">
+                    <p style="color:#4a6080;font-size:14px;margin:0 0 4px;">
                       <a href="tel:${phone}" style="color:#2d4a7a;text-decoration:none;">${phone}</a>
+                    </p>
+                    <p style="color:#4a6080;font-size:14px;margin:0;">
+                      <a href="mailto:${email}" style="color:#2d4a7a;text-decoration:none;">${email}</a>
                     </p>
                   </td>
                 </tr>
@@ -137,6 +173,8 @@ const validateSubmission = [
   body('lastName').trim().notEmpty().withMessage('Last name is required').isLength({ max: 100 }),
   body('phone').trim().notEmpty().withMessage('Phone number is required')
     .matches(/^[\d\s\+\-\(\)]{6,20}$/).withMessage('Please enter a valid phone number'),
+  body('email').trim().notEmpty().withMessage('Email address is required')
+    .isEmail().withMessage('Please enter a valid email address').normalizeEmail(),
   body('services').isArray({ min: 1 }).withMessage('Please select at least one service'),
   body('services.*').isIn(['printedCompendium', 'digitalCompendium', 'visitTouchscreen']),
 ];
@@ -147,7 +185,7 @@ app.post('/api/submit', submitLimiter, validateSubmission, async (req, res) => {
     return res.status(400).json({ success: false, errors: errors.array() });
   }
 
-  const { businessName, firstName, middleName, lastName, phone, services } = req.body;
+  const { businessName, firstName, middleName, lastName, phone, email, services } = req.body;
   const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
 
   const serviceLabels = {
@@ -159,11 +197,13 @@ app.post('/api/submit', submitLimiter, validateSubmission, async (req, res) => {
 
   try {
     const transporter = createTransporter();
+    const recipients = getRecipientConfig();
 
     const mailOptions = {
-      from: `"Yarra Wagga Business Portal" <${process.env.SMTP_USER}>`,
-      to: MANAGER_EMAIL,
-      // cc: STAFF_EMAIL,  // TODO: uncomment before production deployment
+      from: `"${SMTP_FROM_NAME}" <${process.env.SMTP_USER}>`,
+      to: recipients.to,
+      cc: recipients.cc,
+      replyTo: `"${fullName}" <${email}>`,
       subject: `New Business Request — ${businessName}`,
       text: [
         `NEW BUSINESS REQUEST — YARRA WAGGA REGION`,
@@ -171,13 +211,14 @@ app.post('/api/submit', submitLimiter, validateSubmission, async (req, res) => {
         `Business Name: ${businessName}`,
         `Contact Person: ${fullName}`,
         `Phone: ${phone}`,
+        `Email: ${email}`,
         ``,
         `Requested Services:`,
         ...services.map(s => `  • ${serviceLabels[s]}`),
         ``,
         `Submitted: ${new Date().toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })}`,
       ].join('\n'),
-      html: buildEmailHtml({ businessName, firstName, middleName, lastName, phone, services }),
+      html: buildEmailHtml({ businessName, firstName, middleName, lastName, phone, email, services }),
     };
 
     await transporter.sendMail(mailOptions);
@@ -194,6 +235,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  await verifySmtpConfig();
 });
