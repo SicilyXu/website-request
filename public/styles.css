@@ -77,7 +77,17 @@ body {
   flex-shrink: 0;
 }
 .logo-text { display: flex; flex-direction: column; gap: 0; }
-.logo-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
+.logo-brand {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #ffffff 40%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .logo-region { color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; }
 .header-badge {
   background: rgba(201,168,76,.12);
