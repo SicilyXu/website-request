@@ -230,11 +230,26 @@ function showSuccess(data) {
   const serviceList = data.services.map(s => serviceLabels[s]).join(', ');
 
   document.getElementById('successDetails').innerHTML = `
-    <div><strong>Business:</strong> ${escapeHtml(data.businessName)}</div>
-    <div><strong>Contact:</strong> ${escapeHtml(fullName)}</div>
-    <div><strong>Phone:</strong> ${escapeHtml(data.phone)}</div>
-    <div><strong>Email:</strong> ${escapeHtml(data.email)}</div>
-    <div><strong>Services:</strong> ${escapeHtml(serviceList)}</div>
+    <div class="success-detail-row">
+      <span class="success-detail-label">Business:</span>
+      <span class="success-detail-value">${escapeHtml(data.businessName)}</span>
+    </div>
+    <div class="success-detail-row">
+      <span class="success-detail-label">Contact:</span>
+      <span class="success-detail-value">${escapeHtml(fullName)}</span>
+    </div>
+    <div class="success-detail-row">
+      <span class="success-detail-label">Phone:</span>
+      <span class="success-detail-value">${escapeHtml(data.phone)}</span>
+    </div>
+    <div class="success-detail-row">
+      <span class="success-detail-label">Email:</span>
+      <span class="success-detail-value">${escapeHtml(data.email)}</span>
+    </div>
+    <div class="success-detail-row">
+      <span class="success-detail-label">Services:</span>
+      <span class="success-detail-value">${escapeHtml(serviceList)}</span>
+    </div>
   `;
 
   document.getElementById('successState').classList.remove('hidden');

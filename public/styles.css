@@ -447,7 +447,23 @@ body {
   font-size: 14px; color: var(--text-mid);
   line-height: 1.8;
 }
-.success-details strong { color: var(--navy); }
+.success-detail-row {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.success-detail-row + .success-detail-row {
+  margin-top: 8px;
+}
+.success-detail-label {
+  color: var(--navy);
+  font-weight: 700;
+}
+.success-detail-value {
+  min-width: 0;
+  word-break: break-word;
+}
 
 /* ── Trust row ──────────────────────────────────── */
 .trust-row {
