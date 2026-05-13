@@ -30,7 +30,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Open Sans', system-ui, sans-serif;
   color: var(--text);
   background: #0f1b30;
   min-height: 100vh;
@@ -78,7 +78,7 @@ body {
 }
 .logo-text { display: flex; flex-direction: column; gap: 0; }
 .logo-brand {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Open Sans', system-ui, sans-serif;
   font-size: 22px;
   font-weight: 700;
   line-height: 1;
@@ -124,7 +124,7 @@ body {
   50% { opacity:.5; transform:scale(.8); }
 }
 .hero-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Open Sans', system-ui, sans-serif;
   font-size: clamp(36px, 6vw, 56px);
   font-weight: 700;
   color: #fff;
@@ -428,7 +428,7 @@ body {
   to   { transform: scale(1);   opacity: 1; }
 }
 .success-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Open Sans', system-ui, sans-serif;
   font-size: 28px; font-weight: 700;
   color: var(--navy); margin-bottom: 12px;
 }
