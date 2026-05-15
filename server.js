@@ -171,7 +171,11 @@ const validateSubmission = [
   body('firstName').trim().notEmpty().withMessage('First name is required').isLength({ max: 100 }),
   body('lastName').trim().notEmpty().withMessage('Last name is required').isLength({ max: 100 }),
   body('phone').trim().notEmpty().withMessage('Phone number is required')
-    .matches(/^[\d\s\+\-\(\)]{6,20}$/).withMessage('Please enter a valid phone number'),
+    .custom(val => {
+      const digits = val.replace(/[\s\-\(\)]/g, '');
+      if (/^\+61[2-9]\d{8}$/.test(digits) || /^0[2-9]\d{8}$/.test(digits) || /^04\d{8}$/.test(digits)) return true;
+      throw new Error('Please enter a valid Australian phone number');
+    }),
   body('email').trim().notEmpty().withMessage('Email address is required')
     .isEmail().withMessage('Please enter a valid email address').normalizeEmail(),
   body('services').isArray({ min: 1 }).withMessage('Please select at least one service'),

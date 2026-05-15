@@ -41,8 +41,12 @@ function validateStep(step) {
     if (!last)  { showError('lastName',  'Please enter a last name.');  valid = false; }
     if (!phone) {
       showError('phone', 'Please enter a phone number.'); valid = false;
-    } else if (!/^[\d\s\+\-\(\)]{6,20}$/.test(phone)) {
-      showError('phone', 'Please enter a valid phone number.'); valid = false;
+    } else {
+      const digits = phone.replace(/[\s\-\(\)]/g, '');
+      const isValid = /^\+61[2-9]\d{8}$/.test(digits) || /^0[2-9]\d{8}$/.test(digits) || /^04\d{8}$/.test(digits);
+      if (!isValid) {
+        showError('phone', 'Please enter a valid Australian phone number (e.g. 03 9000 1234 or 0412 345 678).'); valid = false;
+      }
     }
     if (!email) {
       showError('email', 'Please enter an email address.'); valid = false;
