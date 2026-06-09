@@ -2,6 +2,11 @@
 
 let currentStep = 1;
 const totalSteps = 3;
+const runtimeConfig = window.REQUEST_PORTAL_CONFIG || {};
+const API_BASE = String(runtimeConfig.apiBaseUrl || '').replace(/\/+$/, '') ||
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3001'
+    : 'https://apis.platypus360.com');
 
 const siteDefaults = {
   warrnambool: {
@@ -49,7 +54,7 @@ async function loadSiteConfig() {
   const requestedSiteKey = getSiteFromRoute();
 
   try {
-    const response = await fetch(`/api/site-config/${encodeURIComponent(requestedSiteKey)}`);
+    const response = await fetch(`${API_BASE}/api/site-config/${encodeURIComponent(requestedSiteKey)}`);
     const data = await response.json();
     currentSite = data.site || currentSite;
     applySiteConfig(currentSite);
@@ -337,7 +342,7 @@ document.getElementById('requestForm').addEventListener('submit', async (event) 
   };
 
   try {
-    const response = await fetch('/api/submit', {
+    const response = await fetch(`${API_BASE}/api/submit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
