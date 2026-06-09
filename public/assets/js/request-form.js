@@ -20,7 +20,7 @@ const siteDefaults = {
     },
     yarrawonga: {
       siteKey: 'yarrawonga',
-      displayName: 'Yarrawonga',
+      displayName: 'Yarrawonga Mulwala',
       websiteUrl: 'https://www.platypus360.com/Yarrawonga',
       backgroundImage: '/request-assets/images/yarrawonga-bg.jpg',
       backgroundVideo: '/request-assets/videos/yarrawonga-bg.mp4',
@@ -221,7 +221,7 @@ function validateStep(step) {
   }
 
   if (step === 3) {
-    const checked = document.querySelectorAll('input[name="services"]:checked');
+    const checked = getSelectedServices();
     const error = document.getElementById('services-error');
     if (checked.length === 0) {
       error.textContent = 'Please select at least one service.';
@@ -307,15 +307,45 @@ if (emailEl) {
 
 document.querySelectorAll('input[name="services"]').forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
-    const checked = document.querySelectorAll('input[name="services"]:checked');
+    syncServiceCardState(checkbox);
+    const checked = getSelectedServices();
     if (checked.length > 0) {
       document.getElementById('services-error').textContent = '';
     }
   });
 });
 
+document.querySelectorAll('.service-card').forEach((card) => {
+  const checkbox = card.querySelector('.service-checkbox');
+  if (!checkbox) return;
+
+  syncServiceCardState(checkbox);
+
+  const toggleCard = () => {
+    checkbox.checked = !checkbox.checked;
+    syncServiceCardState(checkbox);
+    if (getSelectedServices().length > 0) {
+      document.getElementById('services-error').textContent = '';
+    }
+  };
+
+  card.addEventListener('click', (event) => {
+    if (event.target === checkbox) return;
+    event.preventDefault();
+    toggleCard();
+  });
+
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleCard();
+    }
+  });
+});
+
 document.getElementById('requestForm').addEventListener('submit', async (event) => {
   event.preventDefault();
+  syncSelectedServicesToCheckboxes();
   if (!validateStep(3)) return;
 
   const submitBtn = document.getElementById('submitBtn');
@@ -328,8 +358,7 @@ document.getElementById('requestForm').addEventListener('submit', async (event) 
   btnLoader.classList.remove('hidden');
   btnArrow.classList.add('hidden');
 
-  const services = Array.from(document.querySelectorAll('input[name="services"]:checked'))
-    .map((checkbox) => checkbox.value);
+  const services = getSelectedServices();
 
   const payload = {
     siteKey: currentSite.siteKey,
@@ -435,6 +464,10 @@ function resetForm() {
 
   ['businessName', 'firstName', 'lastName', 'phone', 'email'].forEach(clearError);
   document.getElementById('services-error').textContent = '';
+  document.querySelectorAll('input[name="services"]').forEach((checkbox) => {
+    checkbox.checked = false;
+    syncServiceCardState(checkbox);
+  });
 
   currentStep = 1;
   for (let i = 1; i <= totalSteps; i += 1) {
@@ -444,6 +477,43 @@ function resetForm() {
   }
   document.getElementById('step-1').classList.remove('hidden');
   document.getElementById('step-1-indicator').classList.add('active');
+}
+
+function syncServiceCardState(checkbox) {
+  const card = checkbox.closest('.service-card');
+  if (card) {
+    card.classList.toggle('selected', checkbox.checked);
+    card.setAttribute('aria-pressed', checkbox.checked ? 'true' : 'false');
+  }
+}
+
+function getSelectedServices() {
+  const selectedValues = new Set();
+
+  document.querySelectorAll('.service-card.selected').forEach((card) => {
+    const checkbox = card.querySelector('.service-checkbox');
+    if (checkbox && checkbox.value) {
+      selectedValues.add(checkbox.value);
+    } else if (card.dataset.service) {
+      selectedValues.add(card.dataset.service);
+    }
+  });
+
+  document.querySelectorAll('input[name="services"]:checked').forEach((checkbox) => {
+    if (checkbox.value) {
+      selectedValues.add(checkbox.value);
+    }
+  });
+
+  return Array.from(selectedValues);
+}
+
+function syncSelectedServicesToCheckboxes() {
+  const selectedValues = new Set(getSelectedServices());
+  document.querySelectorAll('input[name="services"]').forEach((checkbox) => {
+    checkbox.checked = selectedValues.has(checkbox.value);
+    syncServiceCardState(checkbox);
+  });
 }
 
 function escapeHtml(str) {
