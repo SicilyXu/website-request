@@ -3,47 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Business Registration — Warrnambool | John Batman</title>
-  <meta name="description" content="Register your business or store to join our services in the Warrnambool region." />
+  <title>Warrnambool Business Request Form</title>
+  <meta
+    name="description"
+    content="Register your business or store to join our services in the Warrnambool region."
+  />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 <body>
-
-  <!-- Background layers -->
+  <video
+    class="bg-video hidden"
+    id="bgVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    aria-hidden="true"
+  ></video>
   <div class="bg-gradient"></div>
   <div class="bg-pattern"></div>
 
-  <!-- Top navigation bar -->
   <header class="site-header">
     <div class="header-inner">
       <div class="logo">
-        <span class="logo-brand">Warrnambool</span>
+        <img id="siteHeaderLogo" class="site-header-logo hidden" src="" alt="" />
+        <span class="logo-brand" id="siteDisplayName">Warrnambool</span>
       </div>
       <div class="header-badge">Business Portal</div>
     </div>
   </header>
 
-  <!-- Main content -->
   <main class="main">
     <div class="container">
+      <div class="site-warning hidden" id="siteWarning">Unknown Site Configuration</div>
 
-      <!-- Hero section -->
       <section class="hero">
         <div class="hero-eyebrow">
           <span class="eyebrow-dot"></span>
-          Warrnambool Region
+          <span id="siteRegionLabel">Warrnambool</span>
         </div>
-        <h1 class="hero-title">Partner With Us</h1>
+        <h1 class="hero-title" id="pageHeading">Partner With Us</h1>
         <p class="hero-subtitle">
           Join our network of businesses and partners. Complete the form below and our
           team will be in touch to get you started.
         </p>
       </section>
 
-      <!-- Services overview pills -->
       <div class="service-pills">
         <div class="pill">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -59,10 +71,7 @@
         </div>
       </div>
 
-      <!-- Form card -->
       <div class="card">
-
-        <!-- Step indicator -->
         <div class="steps">
           <div class="step active" id="step-1-indicator">
             <div class="step-number">1</div>
@@ -81,8 +90,6 @@
         </div>
 
         <form id="requestForm" novalidate>
-
-          <!-- ── Step 1: Business Info ── -->
           <div class="form-step" id="step-1">
             <div class="step-header">
               <div class="step-icon">
@@ -102,7 +109,7 @@
                   id="businessName"
                   name="businessName"
                   class="input"
-                  placeholder="e.g. The Corner Café"
+                  placeholder="e.g. The Corner Cafe"
                   autocomplete="organization"
                   required
                 />
@@ -119,7 +126,6 @@
             </div>
           </div>
 
-          <!-- ── Step 2: Contact Details ── -->
           <div class="form-step hidden" id="step-2">
             <div class="step-header">
               <div class="step-icon">
@@ -178,7 +184,6 @@
             </div>
           </div>
 
-          <!-- ── Step 3: Services ── -->
           <div class="form-step hidden" id="step-3">
             <div class="step-header">
               <div class="step-icon">
@@ -259,10 +264,8 @@
               </button>
             </div>
           </div>
-
         </form>
 
-        <!-- Success state -->
         <div class="success-state hidden" id="successState">
           <div class="success-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -275,10 +278,8 @@
           <div class="success-details" id="successDetails"></div>
           <button type="button" class="btn btn-ghost" style="margin-top:24px;" onclick="resetForm()">Submit another request</button>
         </div>
+      </div>
 
-      </div><!-- /.card -->
-
-      <!-- Trust badges -->
       <div class="trust-row">
         <div class="trust-item">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -293,16 +294,15 @@
           Dedicated local support
         </div>
       </div>
-
-    </div><!-- /.container -->
+    </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>&copy; 2026 Warrnambool Region. All rights reserved.</p>
+      <p id="footerText">&copy; 2026 Warrnambool Region. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="/assets/js/request-form.js"></script>
 </body>
 </html>
