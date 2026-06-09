@@ -7,6 +7,7 @@ const { verifySmtpConfig } = require('./services/mail.service');
 
 const app = express();
 const publicDir = path.resolve(__dirname, '..', 'public');
+const requestAssetsDir = path.join(publicDir, 'assets');
 const defaultAllowedOrigins = [
   'https://www.platypus360.com',
   'https://platypus360.com',
@@ -36,7 +37,12 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/request-assets', express.static(requestAssetsDir));
 app.use(express.static(publicDir));
+
+app.get('/request-config.js', (req, res) => {
+  res.sendFile(path.join(publicDir, 'request-config.js'));
+});
 
 app.use('/api', siteRoutes);
 app.use('/api', submitRoutes);

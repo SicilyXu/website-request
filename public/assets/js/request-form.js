@@ -6,25 +6,25 @@ const runtimeConfig = window.REQUEST_PORTAL_CONFIG || {};
 const API_BASE = String(runtimeConfig.apiBaseUrl || '').replace(/\/+$/, '') ||
   (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:3001'
-    : 'https://apis.platypus360.com');
+    : 'https://request-api.platypus360.com');
 
 const siteDefaults = {
   warrnambool: {
     siteKey: 'warrnambool',
     displayName: 'Warrnambool',
     websiteUrl: '/warrnambool',
-    backgroundImage: '/assets/images/warrnambool-bg.jpg',
-    backgroundVideo: '/assets/videos/warrnambool-bg.mp4',
-    logo: '/assets/images/warrnambool-logo.png',
+    backgroundImage: '/request-assets/images/warrnambool-bg.jpg',
+    backgroundVideo: '/request-assets/videos/warrnambool-bg.mp4',
+    logo: '/request-assets/images/warrnambool-logo.png',
     headerLogoMode: 'text',
   },
   yarrawonga: {
     siteKey: 'yarrawonga',
     displayName: 'Yarrawonga Mulwala',
     websiteUrl: 'https://www.platypus360.com/Yarrawonga',
-    backgroundImage: '/assets/images/yarrawonga-bg.jpg',
-    backgroundVideo: '/assets/videos/yarrawonga-bg.mp4',
-    logo: '/assets/images/yarrawonga-mulwala-logo.png',
+    backgroundImage: '/request-assets/images/yarrawonga-bg.jpg',
+    backgroundVideo: '/request-assets/videos/yarrawonga-bg.mp4',
+    logo: '/request-assets/images/yarrawonga-mulwala-logo.png',
     headerLogoMode: 'image',
   },
 };

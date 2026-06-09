@@ -1,0 +1,13 @@
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - mkdir -p dist/request-assets
+        - cp public/index.html dist/
+        - cp public/request-config.js dist/
+        - cp -r public/assets/* dist/request-assets/
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'

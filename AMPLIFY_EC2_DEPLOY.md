@@ -4,7 +4,7 @@
 
 - `Amplify` hosts the static frontend from `public/`
 - `EC2` runs the Express API from `backend/app.js`
-- Frontend API requests go to `https://apis.platypus360.com`
+- Frontend API requests go to `https://request-api.platypus360.com`
 
 ## 1. Configure EC2
 
@@ -42,8 +42,10 @@ frontend:
   phases:
     build:
       commands:
-        - mkdir -p dist
-        - cp -r public/* dist/
+        - mkdir -p dist/request-assets
+        - cp public/index.html dist/
+        - cp public/request-config.js dist/
+        - cp -r public/assets/* dist/request-assets/
   artifacts:
     baseDirectory: dist
     files:
@@ -68,14 +70,29 @@ Add these rewrite rules:
 
 ## 4. Frontend API configuration
 
-The frontend reads the API base URL from `public/config.js`.
+The frontend reads the API base URL from `public/request-config.js`.
 
 Default:
 
 ```js
 window.REQUEST_PORTAL_CONFIG = {
-  apiBaseUrl: 'https://apis.platypus360.com',
+  apiBaseUrl: 'https://request-api.platypus360.com',
 };
 ```
 
 If you need a different backend later, update that file and redeploy Amplify.
+
+## 5. Safe path-based cutover on the existing website
+
+To preserve the existing URLs without colliding with the old site's `/assets`,
+the request app uses:
+
+- `/request-assets/*`
+- `/request-config.js`
+
+That allows the existing website to add only new rewrite rules for:
+
+- `/warrnambool`
+- `/Yarrawonga`
+- `/request-assets/*`
+- `/request-config.js`
