@@ -13,7 +13,7 @@ const requestSites = {
   },
   yarrawonga: {
     siteKey: 'yarrawonga',
-    displayName: 'Yarrawonga Mulwala',
+    displayName: 'Yarrawonga',
     websiteUrl: 'https://www.platypus360.com/Yarrawonga',
     backgroundImage: '/request-assets/images/yarrawonga-bg.jpg',
     backgroundVideo: '/request-assets/videos/yarrawonga-bg.mp4',
