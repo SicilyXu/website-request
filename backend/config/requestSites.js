@@ -21,6 +21,16 @@ const requestSites = {
     headerLogoMode: 'image',
     requestEmailRecipient: 'teresa@johnbatman.com.au, jryan@yarrawongamulwala.com.au, sicily@johnbatman.com.au',
   },
+  brokenhill: {
+    siteKey: 'brokenhill',
+    displayName: 'Broken Hill',
+    websiteUrl: 'https://www.platypus360.com/brokenhill',
+    backgroundImage: '/request-assets/images/brokenhill-bg.jpg',
+    backgroundVideo: '/request-assets/videos/brokenhill-bg.mp4',
+    logo: '/request-assets/images/brokenhill-logo-white.png',
+    headerLogoMode: 'image',
+    requestEmailRecipient: 'teresa@johnbatman.com.au, sicily@johnbatman.com.au',
+  },
 };
 
 const defaultSiteKey = 'warrnambool';

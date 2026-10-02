@@ -27,6 +27,15 @@ const siteDefaults = {
     logo: '/request-assets/images/yarrawonga-mulwala-logo.png',
     headerLogoMode: 'image',
   },
+  brokenhill: {
+    siteKey: 'brokenhill',
+    displayName: 'Broken Hill',
+    websiteUrl: 'https://www.platypus360.com/brokenhill',
+    backgroundImage: '/request-assets/images/brokenhill-bg.jpg',
+    backgroundVideo: '/request-assets/videos/brokenhill-bg.mp4',
+    logo: '/request-assets/images/brokenhill-logo-white.png',
+    headerLogoMode: 'image',
+  },
 };
 
 let currentSite = siteDefaults.warrnambool;
